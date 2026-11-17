@@ -13,6 +13,7 @@
     {
       "name": "WORKOUT APP",
       "tech": "JAVA + MAVEN",
+      "blurb": "Team Java app to search, filter and save workouts",
       "tag": "CO-OP",
       "icon": "dumbbell",
       "repo": "https://github.com/thomassems/MyWorkoutApp"
@@ -20,6 +21,7 @@
     {
       "name": "ASTERISM",
       "tech": "PY + SNOWFLAKE",
+      "blurb": "Clusters shopping behavior into a 3D galaxy map on Snowflake",
       "tag": "CO-OP",
       "icon": "star",
       "repo": "https://github.com/vibhutirp/asterism"
@@ -27,6 +29,7 @@
     {
       "name": "ALGODB LAB",
       "tech": "GO + NEXT.JS",
+      "blurb": "B+Tree store in Go with a visualizer for the WAL, buffer pool and disk",
       "tag": "B+TREE ENGINE",
       "icon": "database",
       "repo": "https://github.com/catou88/GoDatabase"
@@ -34,6 +37,7 @@
     {
       "name": "BUTTERFLAI",
       "tech": "NASA PROJECT",
+      "blurb": "Models sunspot emergence as a point process with classical and AI models",
       "tag": "AI",
       "icon": "butterfly",
       "repo": "https://github.com/catou88/butterflai2"
@@ -41,6 +45,7 @@
     {
       "name": "ORKIO",
       "tech": "CAL HACKS",
+      "blurb": "Coordinates each dev's AI coding agent so they work as one team",
       "tag": "WINNER",
       "icon": "trophy",
       "repo": "https://github.com/chuddrw/CalHacks26"
@@ -48,6 +53,7 @@
     {
       "name": "MANTISGRID",
       "tech": "RCA AGENT",
+      "blurb": "Root-cause agent that answers incidents with a best guess and evidence",
       "tag": "HACKATHON",
       "icon": "magnifier",
       "repo": "https://github.com/catou88/hackathon-2026-official"
@@ -55,6 +61,7 @@
     {
       "name": "LANYARD",
       "tech": "SLACK SEARCH",
+      "blurb": "Saves a Slack workspace and answers questions over it with Claude",
       "tag": "RETRIEVAL",
       "icon": "badge",
       "repo": "https://github.com/catou88/SlackRetrieval"
@@ -62,6 +69,7 @@
     {
       "name": "LEGALLIBRARY",
       "tech": "LEGAL TECH",
+      "blurb": "Legal tech project, just getting started",
       "tag": "NOW BUILDING",
       "icon": "book",
       "repo": "https://github.com/catou88/LegalLibrary"

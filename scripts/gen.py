@@ -554,6 +554,123 @@ def quest_map(profile, stats):
     return "".join(parts)
 
 
+# ── Quest log cards ─────────────────────────────────────────────────────────
+TAG_COLORS = {"WINNER": GOLD, "CO-OP": PINK, "HACKATHON": CYAN}
+CW, CH = 500, 176  # card size
+
+
+def wrap(s, width):
+    lines, cur = [], ""
+    for word in s.upper().split():
+        if cur and len(cur) + 1 + len(word) > width:
+            lines.append(cur)
+            cur = word
+        else:
+            cur = f"{cur} {word}" if cur else word
+    return lines + [cur] if cur else lines
+
+
+def stepped_panel(c, w, h, color, step=4):
+    c.rect(2 * step, 0, w - 4 * step, h, color)
+    c.rect(0, 2 * step, w, h - 4 * step, color)
+    c.rect(step, step, w - 2 * step, h - 2 * step, color)
+
+
+def quest_card(q, i):
+    """One save-slot card per quest; its viewport shows the same island as the banner."""
+    tag = q.get("tag") or ""
+    tcol = TAG_COLORS.get(tag, MINT)
+    num = f"{i + 1:02d}"
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {CW} {CH}" width="{CW}" height="{CH}" '
+         f'role="img" aria-labelledby="t{num} d{num}" shape-rendering="crispEdges">',
+         f'<title id="t{num}">Quest {num}: {q["name"].title()}</title>',
+         f'<desc id="d{num}">{q.get("blurb", "")}</desc>',
+         """<style>
+.isl{animation:isl 3.2s steps(2) infinite alternate}@keyframes isl{to{transform:translateY(-4px)}}
+.glow{animation:glow 2.4s ease-in-out infinite alternate}@keyframes glow{from{opacity:.45}to{opacity:1}}
+.cur{animation:cur 1s steps(1) infinite}@keyframes cur{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>"""]
+    bg = Canvas()
+    stepped_panel(bg, CW, CH, "#080b22")
+    grid = Canvas()
+    for x in range(8, CW, 24):
+        grid.rect(x, 0, 1, CH, "#1a2150@.5")
+    for y in range(8, CH, 24):
+        grid.rect(0, y, CW, 1, "#1a2150@.5")
+    p.append(bg.svg() + grid.svg())
+
+    # viewport: a slice of the banner sky with this quest's island
+    vx, vy, vw, vh = 16, 16, 136, CH - 32
+    view = Canvas()
+    band = vh / len(SKY)
+    for k, col in enumerate(SKY):
+        view.rect(vx, vy + round(k * band / P) * P, vw, round(band / P + 1) * P, col)
+    rng = random.Random(i * 13 + 5)
+    for _ in range(14):
+        view.rect(vx + rng.randrange(0, vw - 4, P), vy + rng.randrange(0, vh - 60, P), 2, 2,
+                  "#ffffff@" + str(rng.choice((.4, .7, .9))))
+    p.append(f'<clipPath id="v{num}"><rect x="{vx}" y="{vy}" width="{vw}" height="{vh}"/></clipPath>'
+             + view.svg())
+    ic, glow = Canvas(), Canvas()
+    cx, top = vx + vw // 2, vy + 84
+    island(ic, glow, cx, top, 96, 44, random.Random(i * 31 + 7))
+    rows, pal = ICONS.get(q.get("icon"), ICONS["beacon"])
+    icon = Canvas()
+    icon.sprite(rows, pal, cx - len(rows[0]) * 2, top - len(rows) * 4 - 2, 4)
+    icon_cls = "glow" if q.get("icon") in ("trophy", "star", "beacon", "butterfly") else ""
+    p.append(f'<g clip-path="url(#v{num})"><g class="isl" style="animation-delay:-{i * .7:.1f}s">'
+             f'{ic.svg()}<g class="glow">{glow.svg()}</g><g class="{icon_cls}">{icon.svg()}</g></g></g>')
+    fr = Canvas()
+    for (x, y, w, h) in ((vx - 4, vy - 4, vw + 8, 4), (vx - 4, vy + vh, vw + 8, 4),
+                         (vx - 4, vy - 4, 4, vh + 8), (vx + vw, vy - 4, 4, vh + 8)):
+        fr.rect(x, y, w, h, "#232a63")
+    brackets(fr, CW, CH, tcol + "@.8", inset=4, arm=16, t=3)
+    p.append(fr.svg())
+
+    # text column
+    tx = vx + vw + 20
+    t = Canvas()
+    t.text(num, tx, 24, 2, CYAN)
+    if tag:
+        tw_ = text_width(tag, 2)
+        t.rect(CW - 20 - tw_ - 12, 19, tw_ + 12, 22, tcol + "@.14")
+        t.text(tag, CW - 20 - tw_ - 6, 23, 2, tcol)
+    t.text(q["name"], tx, 50, 3, INK)
+    t.text(q["tech"], tx, 82, 2, DIM)
+    t.rect(tx, 102, CW - 20 - tx, 2, "#232a63")
+    lines = wrap(q.get("blurb", ""), (CW - 20 - tx + 2) // 12)
+    if len(lines) > 3:
+        print(f"warning: blurb for {q['name']} needs {len(lines)} lines; only 3 fit", file=sys.stderr)
+    for k, line in enumerate(lines[:3]):
+        t.text(line, tx, 116 + k * 18, 2, "#c3cbff")
+    p.append(t.svg())
+    if tag == "NOW BUILDING":
+        dot = Canvas()
+        dot.rect(CW - 20 - text_width(tag, 2) - 24, 27, 6, 6, MINT)
+        p.append(f'<g class="cur">{dot.svg()}</g>')
+    p.append(scanlines(CW, CH, num))
+    p.append("</svg>")
+    return "".join(p)
+
+
+def strip(title, sub, label):
+    """A thin HUD bar that matches the banner, used above and below the cards."""
+    w, h = 1000, 64
+    c = Canvas()
+    stepped_panel(c, w, h, "#080b22")
+    brackets(c, w, h, CYAN + "@.7", inset=4, arm=18, t=3)
+    c.text(title, 24, 22, 3, CYAN)
+    c.text(sub, w - 24 - text_width(sub, 2), 26, 2, DIM)
+    cur = Canvas()
+    cur.rect(24 + text_width(title, 3) + 8, 22, 10, 21, CYAN)
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" '
+            f'role="img" aria-label="{label}" shape-rendering="crispEdges">'
+            '<style>.cur{animation:cur 1s steps(1) infinite}@keyframes cur{50%{opacity:0}}'
+            '@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>'
+            f'{c.svg()}<g class="cur">{cur.svg()}</g>{scanlines(w, h, title[:2])}</svg>')
+
+
 # ── HUD card ────────────────────────────────────────────────────────────────
 CAT_AVATAR = [
     "..o..........o..",
@@ -733,7 +850,47 @@ def main():
         f.write(hud(profile, stats))
     with open(os.path.join(out, "quest-map.svg"), "w") as f:
         f.write(quest_map(profile, stats))
-    print("wrote assets/hud.svg, assets/quest-map.svg")
+    qdir = os.path.join(out, "quests")
+    os.makedirs(qdir, exist_ok=True)
+    for name in os.listdir(qdir):  # drop cards for quests that were removed
+        if name.endswith(".svg"):
+            os.remove(os.path.join(qdir, name))
+    with open(os.path.join(qdir, "header.svg"), "w") as f:
+        f.write(strip("QUEST DETAILS", "SAME ORDER AS THE ISLANDS. SELECT A CARD TO OPEN IT",
+                      "Quest details: select a card to open its repo"))
+    with open(os.path.join(qdir, "footer.svg"), "w") as f:
+        f.write(strip("SYNC OK", "SKYLINE = LAST 52 WEEKS. TALLER = BUSIER. UPDATES DAILY",
+                      "The skyline shows the last 52 weeks of contributions and updates daily"))
+    for i, q in enumerate(profile["quests"]):
+        with open(os.path.join(qdir, f"{i + 1:02d}.svg"), "w") as f:
+            f.write(quest_card(q, i))
+    sync_readme(profile["quests"])
+    print(f"wrote assets/hud.svg, assets/quest-map.svg, assets/quests/ ({len(profile['quests'])} cards)")
+
+
+def sync_readme(quests):
+    """Rewrite the card grid between the quest markers in README.md, two cards per row."""
+    path = os.path.join(ROOT, "README.md")
+    start, end = "<!-- quests:start -->", "<!-- quests:end -->"
+    if not os.path.exists(path):
+        return
+    text = open(path).read()
+    if start not in text or end not in text:
+        return
+    cells = []
+    for i, q in enumerate(quests):
+        n = f"{i + 1:02d}"
+        alt = f'Quest {n}, {q["name"]}: {q.get("blurb", q["tech"])}'.replace('"', "'")
+        img = f'<img src="assets/quests/{n}.svg" width="49%" alt="{alt}">'
+        cells.append(f'<a href="{q["repo"]}">{img}</a>' if q.get("repo") else img)
+    rows = [" ".join(cells[k:k + 2]) for k in range(0, len(cells), 2)]
+    block = (f'{start}\n<img src="assets/quests/header.svg" width="100%" alt="Quest details: select a card to open its repo">\n\n'
+             + "\n\n".join(rows)
+             + '\n\n<img src="assets/quests/footer.svg" width="100%" alt="The skyline shows the last 52 weeks '
+             + f'of contributions and updates daily">\n{end}')
+    head, rest = text.split(start, 1)
+    with open(path, "w") as f:
+        f.write(head + block + rest.split(end, 1)[1])
 
 
 if __name__ == "__main__":

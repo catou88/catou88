@@ -10,7 +10,7 @@
 
 | | Project | What it is |
 |---|---|---|
-| 🏆 | [**Orkio**](https://github.com/catou88/OrkioDemo): Cal Hacks winner | Agent Cowork: hooks and an MCP server that let each teammate's Claude Code agent own a module of a shared repo while an orchestrator keeps their changes compatible |
+| 🏆 | [**Orkio**](https://github.com/chuddrw/CalHacks26): Cal Hacks winner | Coordinates several developers' AI coding agents so they work as one team. An orchestrator assigns tasks, agents negotiate conflicts, and shared state lives in SpacetimeDB. |
 | 🔍 | [**MantisGrid**](https://github.com/catou88/hackathon-2026-official): hackathon | A Dockerized root-cause-analysis agent that answers incident queries with a best guess plus a written evidence file for each one |
 | 🪪 | [**Lanyard**](https://github.com/catou88/SlackRetrieval) | Saves a Slack workspace offline, builds a contact book, and answers questions over it with local-embedding search and Claude |
 | 🦋 | [**ButterflAI**](https://github.com/catou88/butterflai2) | Models sunspot emergence as a spatiotemporal point process with classical and AI models (COFFIES Science Center research program) |

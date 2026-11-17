@@ -2,7 +2,7 @@
 
 <img src="assets/hud.svg" width="100%" alt="CATOU88 player card: level, lifetime contributions, commits, collab repos, 1 hackathon win, 2 hackathon entries, 4 team projects">
 
-<img src="assets/quest-map.svg" width="100%" alt="Quest log: a cat flies a blimp over eight floating islands, one for each project, above a city built from my contribution graph">
+<img src="assets/quest-map.svg" width="100%" alt="Quest log: a cat flies a blimp over nine floating islands, one for each project, above a city built from my contribution graph">
 
 </div>
 
@@ -16,6 +16,7 @@
 | 🦋 | [**ButterflAI**](https://github.com/catou88/butterflai2) | Models sunspot emergence as a spatiotemporal point process with classical and AI models (COFFIES Science Center research program) |
 | 📚 | [**LegalLibrary**](https://github.com/catou88/LegalLibrary): now building | Legal tech project, just getting started |
 | 🗄️ | [**AlgoDB Lab**](https://github.com/catou88/GoDatabase) | A durable B+Tree store in Go, plus a Next.js visualizer that traces operations through the WAL, the buffer pool and the disk |
+| 🅿️ | [**SFpark**](https://github.com/catou88/SFpark) | A team project that predicts San Francisco parking availability from meter, weather and event data. It compares linear, gradient-boosting and CatBoost models and shows the results in Streamlit and Dash dashboards |
 | 🌌 | [**Asterism**](https://github.com/vibhutirp/asterism) | Clusters store-purchase behavior into a 3D galaxy map, built with Streamlit and Snowflake |
 | 🏋️ | [**Workout App**](https://github.com/thomassems/MyWorkoutApp) | A team-built Java app for searching, filtering and saving workouts |
 
@@ -66,7 +67,7 @@ Each entry in `quests` becomes one island. Islands are visited left to right, an
   "icon": "database", "repo": "https://github.com/catou88/GoDatabase" }
 ```
 
-- **Icons:** `dumbbell`, `database`, `star`, `trophy`, `magnifier`, `badge`, `butterfly`, `book`, `beacon`. Any other name falls back to `beacon`.
+- **Icons:** `dumbbell`, `database`, `star`, `trophy`, `magnifier`, `badge`, `butterfly`, `book`, `parking`, `beacon`. Any other name falls back to `beacon`.
 - **Tag colours:** `WINNER` is gold, `CO-OP` is pink, `HACKATHON` is cyan, and anything else is mint. `NOW BUILDING` also gets a blinking cursor.
 - **Text:** keep each line to about 14 characters. The font covers A–Z, 0–9 and `. : - / + ! ? # & > = ' %`, and any other character renders as `?`.
 

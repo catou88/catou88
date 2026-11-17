@@ -32,13 +32,6 @@
       "repo": "https://github.com/catou88/GoDatabase"
     },
     {
-      "name": "SFPARK",
-      "tech": "PY + STREAMLIT",
-      "tag": "CO-OP",
-      "icon": "parking",
-      "repo": "https://github.com/catou88/SFpark"
-    },
-    {
       "name": "BUTTERFLAI",
       "tech": "NASA PROJECT",
       "tag": "AI",

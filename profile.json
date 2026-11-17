@@ -36,35 +36,35 @@
       "tech": "NASA PROJECT",
       "tag": "AI",
       "icon": "butterfly",
-      "repo": ""
+      "repo": "https://github.com/catou88/butterflai2"
     },
     {
       "name": "ORKIO",
       "tech": "HACKATHON",
       "tag": "WINNER",
       "icon": "trophy",
-      "repo": ""
+      "repo": "https://github.com/catou88/OrkioDemo"
     },
     {
       "name": "MANTISGRID",
       "tech": "RCA AGENT",
       "tag": "HACKATHON",
       "icon": "magnifier",
-      "repo": ""
+      "repo": "https://github.com/catou88/hackathon-2026-official"
     },
     {
       "name": "LANYARD",
       "tech": "SLACK SEARCH",
       "tag": "RETRIEVAL",
       "icon": "badge",
-      "repo": ""
+      "repo": "https://github.com/catou88/SlackRetrieval"
     },
     {
       "name": "LEGALLIBRARY",
       "tech": "LEGAL TECH",
       "tag": "NOW BUILDING",
       "icon": "book",
-      "repo": ""
+      "repo": "https://github.com/catou88/LegalLibrary"
     }
   ]
 }

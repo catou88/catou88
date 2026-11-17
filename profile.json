@@ -1,0 +1,70 @@
+{
+  "login": "catou88",
+  "display_name": "CATOU88",
+  "role": "FULL-STACK BUILDER",
+  "loadout": ["GO", "JAVA", "TS", "PY"],
+  "achievements": ["PULL SHARK X2", "QUICKDRAW", "PAIR EXTRAORDINAIRE", "YOLO"],
+  "manual_stats": {
+    "hackathon_wins": 1,
+    "hackathons": 2,
+    "team_projects": 4
+  },
+  "quests": [
+    {
+      "name": "WORKOUT APP",
+      "tech": "JAVA + MAVEN",
+      "tag": "CO-OP",
+      "icon": "dumbbell",
+      "repo": "https://github.com/thomassems/MyWorkoutApp"
+    },
+    {
+      "name": "ASTERISM",
+      "tech": "PY + SNOWFLAKE",
+      "tag": "CO-OP",
+      "icon": "star",
+      "repo": "https://github.com/vibhutirp/asterism"
+    },
+    {
+      "name": "ALGODB LAB",
+      "tech": "GO + NEXT.JS",
+      "tag": "B+TREE ENGINE",
+      "icon": "database",
+      "repo": "https://github.com/catou88/GoDatabase"
+    },
+    {
+      "name": "BUTTERFLAI",
+      "tech": "NASA PROJECT",
+      "tag": "AI",
+      "icon": "butterfly",
+      "repo": ""
+    },
+    {
+      "name": "ORKIO",
+      "tech": "HACKATHON",
+      "tag": "WINNER",
+      "icon": "trophy",
+      "repo": ""
+    },
+    {
+      "name": "MANTISGRID",
+      "tech": "RCA AGENT",
+      "tag": "HACKATHON",
+      "icon": "magnifier",
+      "repo": ""
+    },
+    {
+      "name": "LANYARD",
+      "tech": "SLACK SEARCH",
+      "tag": "RETRIEVAL",
+      "icon": "badge",
+      "repo": ""
+    },
+    {
+      "name": "LEGALLIBRARY",
+      "tech": "LEGAL TECH",
+      "tag": "NOW BUILDING",
+      "icon": "book",
+      "repo": ""
+    }
+  ]
+}

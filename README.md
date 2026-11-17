@@ -4,29 +4,28 @@
 
 <img src="assets/quest-map.svg" width="100%" alt="Quest log: a cat flies a blimp over eight floating islands, one for each project, above a city built from my contribution graph">
 
+<!-- quests:start -->
+<img src="assets/quests/header.svg" width="100%" alt="Quest details: select a card to open its repo">
+
+<a href="https://github.com/thomassems/MyWorkoutApp"><img src="assets/quests/01.svg" width="49%" alt="Quest 01, WORKOUT APP: Team Java app to search, filter and save workouts"></a> <a href="https://github.com/vibhutirp/asterism"><img src="assets/quests/02.svg" width="49%" alt="Quest 02, ASTERISM: Clusters shopping behavior into a 3D galaxy map on Snowflake"></a>
+
+<a href="https://github.com/catou88/GoDatabase"><img src="assets/quests/03.svg" width="49%" alt="Quest 03, ALGODB LAB: B+Tree store in Go with a visualizer for the WAL, buffer pool and disk"></a> <a href="https://github.com/catou88/butterflai2"><img src="assets/quests/04.svg" width="49%" alt="Quest 04, BUTTERFLAI: Models sunspot emergence as a point process with classical and AI models"></a>
+
+<a href="https://github.com/chuddrw/CalHacks26"><img src="assets/quests/05.svg" width="49%" alt="Quest 05, ORKIO: Coordinates each dev's AI coding agent so they work as one team"></a> <a href="https://github.com/catou88/hackathon-2026-official"><img src="assets/quests/06.svg" width="49%" alt="Quest 06, MANTISGRID: Root-cause agent that answers incidents with a best guess and evidence"></a>
+
+<a href="https://github.com/catou88/SlackRetrieval"><img src="assets/quests/07.svg" width="49%" alt="Quest 07, LANYARD: Saves a Slack workspace and answers questions over it with Claude"></a> <a href="https://github.com/catou88/LegalLibrary"><img src="assets/quests/08.svg" width="49%" alt="Quest 08, LEGALLIBRARY: Legal tech project, just getting started"></a>
+
+<img src="assets/quests/footer.svg" width="100%" alt="The skyline shows the last 52 weeks of contributions and updates daily">
+<!-- quests:end -->
+
 </div>
-
-### Quest log
-
-| | Project | What it is |
-|---|---|---|
-| 🏆 | [**Orkio**](https://github.com/chuddrw/CalHacks26): Cal Hacks winner | Coordinates several developers' AI coding agents so they work as one team. An orchestrator assigns tasks, agents negotiate conflicts, and shared state lives in SpacetimeDB. |
-| 🔍 | [**MantisGrid**](https://github.com/catou88/hackathon-2026-official): hackathon | A Dockerized root-cause-analysis agent that answers incident queries with a best guess plus a written evidence file for each one |
-| 🪪 | [**Lanyard**](https://github.com/catou88/SlackRetrieval) | Saves a Slack workspace offline, builds a contact book, and answers questions over it with local-embedding search and Claude |
-| 🦋 | [**ButterflAI**](https://github.com/catou88/butterflai2) | Models sunspot emergence as a spatiotemporal point process with classical and AI models (COFFIES Science Center research program) |
-| 📚 | [**LegalLibrary**](https://github.com/catou88/LegalLibrary): now building | Legal tech project, just getting started |
-| 🗄️ | [**AlgoDB Lab**](https://github.com/catou88/GoDatabase) | A durable B+Tree store in Go, plus a Next.js visualizer that traces operations through the WAL, the buffer pool and the disk |
-| 🌌 | [**Asterism**](https://github.com/vibhutirp/asterism) | Clusters store-purchase behavior into a 3D galaxy map, built with Streamlit and Snowflake |
-| 🏋️ | [**Workout App**](https://github.com/thomassems/MyWorkoutApp) | A team-built Java app for searching, filtering and saving workouts |
-
-<sub>The cards refresh daily from my GitHub activity. The skyline at the bottom of the quest log shows my last 52 weeks of contributions, and taller buildings mean busier weeks.</sub>
 
 <details>
 <summary><b>How this profile works</b></summary>
 
 <br>
 
-Both cards above are plain SVG files drawn entirely from rectangles by a small Python generator. They use no web fonts, no JavaScript and no third-party stats service, so GitHub renders them as is. The animation is CSS keyframes inside the SVG, and it switches off for viewers who set `prefers-reduced-motion`.
+Every graphic above is a plain SVG file drawn entirely from rectangles by a small Python generator. They use no web fonts, no JavaScript and no third-party stats service, so GitHub renders them as is. The animation is CSS keyframes inside the SVG, and it switches off for viewers who set `prefers-reduced-motion`.
 
 #### Repository layout
 
@@ -34,10 +33,11 @@ Both cards above are plain SVG files drawn entirely from rectangles by a small P
 |---|---|
 | `profile.json` | Everything you edit by hand: name, role, loadout, achievements, hackathon counts and the list of quests (islands). |
 | `scripts/pixel.py` | A tiny pixel-art toolkit: a 5×7 bitmap font, sprite drawing, and a `Canvas` that merges pixels into one `<path>` per colour to keep the files small. |
-| `scripts/gen.py` | Renders `assets/hud.svg` (player card) and `assets/quest-map.svg` (blimp tour and contribution city) from `profile.json` and `data/stats.json`. |
+| `scripts/gen.py` | Renders `assets/hud.svg` (player card), `assets/quest-map.svg` (blimp tour and contribution city) and `assets/quests/` (one card per island, plus the header and footer strips) from `profile.json` and `data/stats.json`. It also rewrites the card grid between the `<!-- quests:start -->` and `<!-- quests:end -->` markers in this README. |
 | `scripts/fetch_stats.py` | Calls the GitHub GraphQL API and writes `data/stats.json`: lifetime contributions, commits, PRs, repos contributed to and the last 52 weeks of activity. |
 | `.github/workflows/profile.yml` | Runs fetch, then render, then commit. It runs daily at 09:17 UTC, on manual dispatch, and on pushes that touch `profile.json` or `scripts/`. |
 | `assets/` | The generated SVGs. Don't edit these by hand, because the next run overwrites them. |
+| `assets/quests/NN.svg` | Quest cards. Each card shows the same island and icon as its spot on the banner, in the same order, and links to the quest's `repo`. |
 | `data/stats.json` | Created by the workflow on its first run. It is committed so that local renders can reuse it. |
 | `SETUP.md` | A short checklist for first-time setup. |
 
@@ -62,13 +62,16 @@ profile.json ──────────────────────�
 Each entry in `quests` becomes one island. Islands are visited left to right, and anything past 5 wraps onto a second row.
 
 ```json
-{ "name": "ALGODB LAB", "tech": "GO + NEXT.JS", "tag": "B+TREE ENGINE",
-  "icon": "database", "repo": "https://github.com/catou88/GoDatabase" }
+{ "name": "ALGODB LAB", "tech": "GO + NEXT.JS",
+  "blurb": "B+Tree store in Go with a visualizer for the WAL, buffer pool and disk",
+  "tag": "B+TREE ENGINE", "icon": "database", "repo": "https://github.com/catou88/GoDatabase" }
 ```
 
 - **Icons:** `dumbbell`, `database`, `star`, `trophy`, `magnifier`, `badge`, `butterfly`, `book`, `beacon`. Any other name falls back to `beacon`.
 - **Tag colours:** `WINNER` is gold, `CO-OP` is pink, `HACKATHON` is cyan, and anything else is mint. `NOW BUILDING` also gets a blinking cursor.
-- **Text:** keep each line to about 14 characters. The font covers A–Z, 0–9 and `. : - / + ! ? # & > = ' %`, and any other character renders as `?`.
+- **Text:** keep `name` and `tech` to about 14 characters each. The `blurb` gets three lines of 25 characters on its card, and `gen.py` prints a warning if it runs longer.
+- **Cards stay in sync:** don't edit the card grid in this README by hand. Change `profile.json` and run `gen.py`, which rewrites it.
+- **Font:** the pixel font covers A–Z, 0–9 and `. , : - / + ! ? # & > = ' % ( )`, and any other character renders as `?`.
 
 #### Run it locally
 

@@ -10,7 +10,7 @@
 
 Everything you might want to change is in `profile.json`:
 
-- `quests`: one island each, flown left to right. Change the order to match when you built them. Each quest has a `name`, a `tech` line and a `tag` (`CO-OP` shows in pink, `WINNER` in gold, `HACKATHON` in cyan, anything else in mint; `NOW BUILDING` also gets a blinking dot). The `icon` can be `dumbbell`, `database`, `star`, `trophy`, `magnifier`, `badge`, `butterfly`, `book` or `beacon` (unknown names fall back to `beacon`). Keep each text line to about 14 characters.
+- `quests`: one island each, flown left to right. Change the order to match when you built them. Each quest has a `name`, a `tech` line, a `blurb` (one sentence for its card) and a `tag` (`CO-OP` shows in pink, `WINNER` in gold, `HACKATHON` in cyan, anything else in mint; `NOW BUILDING` also gets a blinking dot). The `icon` can be `dumbbell`, `database`, `star`, `trophy`, `magnifier`, `badge`, `butterfly`, `book` or `beacon` (unknown names fall back to `beacon`). Keep each text line to about 14 characters.
 - `manual_stats`: hackathon wins and team projects. GitHub can't count these for you.
 - `achievements`, `loadout`, `role`: the text on the player card.
 

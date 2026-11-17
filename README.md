@@ -10,11 +10,11 @@
 
 | | Project | What it is |
 |---|---|---|
-| 🏆 | **Orkio**: hackathon winner | <!-- add one line + link --> Contributor on the winning team |
-| 🔍 | **MantisGrid**: hackathon | A root-cause-analysis agent <!-- add link --> |
-| 🪪 | **Lanyard** | Retrieval and search over Slack <!-- add link --> |
-| 🦋 | **ButterflAI** | NASA project <!-- add one line + link --> |
-| 📚 | **LegalLibrary**: now building | <!-- add one line + link --> |
+| 🏆 | [**Orkio**](https://github.com/catou88/OrkioDemo): Cal Hacks winner | Agent Cowork: hooks and an MCP server that let each teammate's Claude Code agent own a module of a shared repo while an orchestrator keeps their changes compatible |
+| 🔍 | [**MantisGrid**](https://github.com/catou88/hackathon-2026-official): hackathon | A Dockerized root-cause-analysis agent that answers incident queries with a best guess plus a written evidence file for each one |
+| 🪪 | [**Lanyard**](https://github.com/catou88/SlackRetrieval) | Saves a Slack workspace offline, builds a contact book, and answers questions over it with local-embedding search and Claude |
+| 🦋 | [**ButterflAI**](https://github.com/catou88/butterflai2) | Models sunspot emergence as a spatiotemporal point process with classical and AI models (COFFIES Science Center research program) |
+| 📚 | [**LegalLibrary**](https://github.com/catou88/LegalLibrary): now building | Legal tech project, just getting started |
 | 🗄️ | [**AlgoDB Lab**](https://github.com/catou88/GoDatabase) | A durable B+Tree store in Go, plus a Next.js visualizer that traces operations through the WAL, the buffer pool and the disk |
 | 🌌 | [**Asterism**](https://github.com/vibhutirp/asterism) | Clusters store-purchase behavior into a 3D galaxy map, built with Streamlit and Snowflake |
 | 🏋️ | [**Workout App**](https://github.com/thomassems/MyWorkoutApp) | A team-built Java app for searching, filtering and saving workouts |
